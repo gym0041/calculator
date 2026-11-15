@@ -1,5 +1,112 @@
+:root {
+  font-family: "Segoe-UI", Helvetica, sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.calculator {
+  border: 1px solid rgb(199, 198, 198);
+  border-radius: 4px;
+  padding: 8px;
+  width: 340px;
+  margin: 30px auto;
+  background-color: rgb(242, 239, 239);
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+.display {
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.previous {
+  min-height: 30px;
+  text-align: right;
+  font-size: 20px;
+  color: lightgray;
+}
+
+.display>p[class="current"] {
+  text-align: end;
+  background-color: lightgray;
+  min-height: 30px;
+  padding: 4px 8px 2px 0;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.buttons>* {
+  font-size: 20px;
+  padding: 8px 14px;
+}
+
+button[value="1"] {
+  grid-row: 4;
+}
+
+button[value="2"] {
+  grid-row: 4;
+  grid-column: 2;
+}
+
+button[value="3"] {
+  grid-row: 4;
+  grid-column: 3;
+}
+
+button[value="4"] {
+  grid-row: 3;
+  grid-column: 1;
+}
+
+button[value="5"] {
+  grid-row: 3;
+}
+
+button[value="6"] {
+  grid-row: 3;
+}
+
+button[value="7"] {
+  grid-row: 2;
+}
+
+button[value="8"] {
+  grid-row: 2;
+}
+
+button[value="9"] {
+  grid-row: 2;
+}
+
+button[value="0"] {
+  grid-row: 5;
+  grid-column: 2;
+}
+
+button[value="."] {
+  grid-row: 5;
+  grid-column: 3;
+}
+
+button[data-operator="+"] {
+  grid-row: 3 / 5;
+  grid-column: 4;
+}
+
+button[data-action="="] {
+  grid-column: 4;
+}
+
+button[data-operator="-"] {
+  grid-column: 4;
+  grid-row: 2
 }
