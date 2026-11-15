@@ -5,6 +5,7 @@ const buttonsContainerRef = document.querySelector(".buttons");
 const numButtons = document.querySelectorAll("button[data-number]");
 const opButtons = document.querySelectorAll("button[data-operator]");
 const equalBtn = document.querySelector("button[data-action='=']");
+const clearBtn = document.querySelector("button[data-action='C']");
 
 [...numButtons].forEach((button) =>
   button.addEventListener("click", function (e) {
@@ -22,6 +23,10 @@ equalBtn.addEventListener("click", function (e) {
   console.log("sss");
   onEqual();
 });
+clearBtn.addEventListener("click", function (e) {
+  clear();
+  updateUI();
+});
 let firstNum = "";
 let secondNum = "";
 let operator = "";
@@ -35,6 +40,12 @@ function onEqual() {
   if (!firstNum || !operator || !secondNum) return;
 
   result = operate(operator, +firstNum, +secondNum);
+  if (typeof result === "string") {
+    clear();
+    updateUI();
+    currPara.textContent = result;
+    return;
+  }
   resultDisplayed = true;
   updateUI();
 }
@@ -68,7 +79,10 @@ function updateUI() {
     prevPara.textContent = `${firstNum} ${operator} ${secondNum} =`;
     currPara.textContent = result;
   }
-  if (!firstNum) currPara.textContent = "0";
+  if (!firstNum) {
+    prevPara.textContent = "";
+    currPara.textContent = "0";
+  }
 
   if (firstNum && !operator) currPara.textContent = firstNum;
   if (firstNum && operator && !resultDisplayed) {
@@ -91,8 +105,14 @@ function addOperator(op) {
   }
   if (operator && firstNum && secondNum) {
     firstNum = operate(operator, +firstNum, +secondNum);
+    if (typeof firstNum === "string") {
+      clear();
+      updateUI();
+      return;
+    }
     secondNum = "";
     operator = op;
+    resultDisplayed = false;
     updateUI();
   }
 }
@@ -106,6 +126,9 @@ function multiply(a, b) {
   return a * b;
 }
 function divide(a, b) {
+  if (b === 0) {
+    return "Ha..cant divide by 0";
+  }
   return a / b;
 }
 
